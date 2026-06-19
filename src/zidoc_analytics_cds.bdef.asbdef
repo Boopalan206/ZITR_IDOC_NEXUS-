@@ -1,0 +1,35 @@
+managed implementation in class zbp_idoc_analytics_cds unique;
+strict ( 2 );
+
+define behavior for zidoc_analytics_cds //alias <alias_name>
+persistent table ZIDOC_ANALYTICS
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+    // Handle client field automatically
+  field ( readonly : update ) IdocNumber, IdocYear, IdocMonth;
+  field ( mandatory : create ) IdocNumber, IdocYear, IdocMonth;
+
+  mapping for zidoc_analytics corresponding
+  {
+    IdocNumber = idoc_number;
+    IdocYear = idoc_year;
+    IdocMonth = idoc_month;
+    Credat = credat;
+    Customername = customername;
+    Monthyear = monthyear;
+    IdocDelayed = idoc_delayed;
+    TotalValue = total_value;
+    AverageDaysDelayed = average_days_delayed;
+    Reason = reason;
+    ReasonText = reason_text;
+    IdocType = idoc_type;
+    MessageType = message_type;
+  }
+
+}
